@@ -30,6 +30,17 @@ def write_review(params):
             'code' : 400,
             'message' : '수강 해야지만 리뷰 작성 가능'
         }, 400
+        
+        
+    sql = f"SELECT * FROM lecture_review WHERE lecture_id = {params['lecture_id']} AND user_id = {params['user_id']}"
+    
+    already_review_data = db.executeOne(sql)
+    if already_review_data:
+        return{
+            'code' : 400,
+            'message' : '이미 리뷰를 등록했자나'
+        }, 400
+    
     
     sql = f"INSERT INTO lecture_review (lecture_id, user_id, title, content, score) VALUES ({params['lecture_id']}, {params['user_id']}, '{params['title']}', '{params['content']}', {score})"
     
