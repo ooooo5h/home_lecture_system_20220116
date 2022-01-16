@@ -19,3 +19,15 @@ def login(params):
         'message' : '로그인 성공',
         'user' : Users(login_user).get_data_object()
     }
+    
+def sign_up(params):
+       
+    sql = f"INSERT INTO users (email, password, name) VALUES ('{params['email']}','{params['password']}','{params['name']}')"
+    
+    db.insertAndCommit(sql)
+    
+    return{
+        'code' : 200,
+        'message' : '회원가입 성공'
+    }
+    
