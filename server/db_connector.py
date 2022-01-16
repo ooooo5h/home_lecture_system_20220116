@@ -20,3 +20,7 @@ class DBConnector:
     def executeAll(self, sql):
         self.cursor.execute(sql)
         return self.cursor.fetchall()
+    
+    def executeOne(self, sql):
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()
