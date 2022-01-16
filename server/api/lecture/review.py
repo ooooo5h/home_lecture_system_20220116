@@ -55,6 +55,23 @@ def modify_review(params):
     
     column_name = params['field']
     
+    sql = f"SELECT * FROM lecture_review WHERE id={params['review_id']}"
+    
+    review_data = db.executeOne(sql)
+    
+    if review_data == None:
+        return{
+            'code' : 400,
+            'message' : '해당 리뷰는 존재하지 않음'
+        }, 400
+    
+    # DB에서 가져온 user_id는 int로 받아옴 / 파라미터에서 가져온 user_id는 str로 받아옴
+    if int(review_data['user_id']) != int(params['user_id']):
+        return{
+            'code' : 400,
+            'message' : '니가쓴거만 수정해'
+        }, 400
+    
     if column_name == 'title':
         sql = f"UPDATE lecture_review SET title='{params['value']}' WHERE id = {params['review_id']}"
         
@@ -80,6 +97,15 @@ def modify_review(params):
         
     
     if column_name == 'score':
+        
+        score = float(params['value'])
+        
+        if not (1<=score<=5):
+            return{
+                'code' : 400,
+                'message' : '점수는 1 ~5 사이만 입력가능합니다.'
+            }, 400
+        
         sql = f"UPDATE lecture_review SET score = {params['value']} WHERE id ={params['review_id']}"
         
         db.cursor.execute(sql)
