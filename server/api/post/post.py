@@ -36,7 +36,7 @@ def add_post(params):
     
     sql = f"INSERT INTO posts (user_id, title, content) VALUES ({params['user_id']}, '{params['title']}', '{params['content']}')"
     
-    db.insertAndCommit(sql)
+    db.executeQueryAndCommit(sql)
     
     return{
         'code' : 200,
@@ -49,6 +49,12 @@ def modify_post(params):
 }
         
 def delete_post(params):
+    
+    sql = f"DELETE FROM posts WHERE id = {params['post_id']}"
+    
+    db.executeQueryAndCommit(sql)
+        
     return{
-        '임시' : '게시글 삭제'
+        'code' : 200,
+        'message' : '게시글 삭제 성공'
     }
