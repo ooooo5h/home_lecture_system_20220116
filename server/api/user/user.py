@@ -3,13 +3,19 @@ from server.model.users import Users
 
 db = DBConnector()
 
-def test():
-
-    sql = "SELECT * FROM users"
-    all_list = db.executeAll(sql)
+def login(params):
+    sql = f"SELECT * FROM users WHERE email = '{params['email']}' AND password = '{params['password']}'"
     
-    all_users = [Users(row).get_data_object() for row in all_list]
+    login_user = db.executeOne(sql)
     
-    return {
-        'users' : all_users
+    if login_user == None:
+        return{
+            'code' : 400,
+            'message' : '이메일 or 비밀번호 잘못됨'
+        }
+    
+    return{
+        'code' : 200,
+        'message' : '로그인 성공',
+        'user' : Users(login_user).get_data_object()
     }
