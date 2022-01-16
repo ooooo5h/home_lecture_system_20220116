@@ -6,8 +6,7 @@ db = DBConnector()
 def test():
 
     sql = "SELECT * FROM users"
-    db.cursor.execute(sql)
-    all_list = db.cursor.fetchall()
+    all_list = db.executeAll(sql)
     
     all_users = [Users(row).get_data_object() for row in all_list]
     
