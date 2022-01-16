@@ -17,5 +17,13 @@ class Lectures:
         
         if reviews:
             data['reviews'] = reviews
-        
+            
+            sum_score = 0
+            
+            for review in reviews:
+                sum_score += review['score'] 
+
+            avg_score = sum_score / len(reviews)
+            
+            data['avg_score'] = avg_score        
         return data
