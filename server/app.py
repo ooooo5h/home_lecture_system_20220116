@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
     
     from .api.user import login, sign_up, find_user_by_email
-    from .api.lecture import get_all_lectures
+    from .api.lecture import get_all_lectures, apply_lecture
     
     @app.post("/user")
     def user_post():
@@ -26,5 +26,9 @@ def create_app():
     @app.get("/lecture")
     def lecture_get():
         return get_all_lectures(request.args.to_dict())
+    
+    @app.post("/lecture")
+    def lecture_post():
+        return apply_lecture(request.form.to_dict())
     
     return app

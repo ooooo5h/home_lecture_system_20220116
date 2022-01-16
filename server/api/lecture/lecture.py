@@ -16,3 +16,9 @@ def get_all_lectures(params):
             'lectures' : lectures,
         }
     }
+    
+# 수강신청 기능
+def apply_lecture(params):
+    return{
+        'code' : '임시 수강신청'
+    }
