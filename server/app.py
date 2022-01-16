@@ -3,7 +3,7 @@ from flask import Flask
 from server.db_connector import DBConnector
 from .api.user import test
 
-db = DBConnector()
+# db = DBConnector()
 
 def create_app():
     app = Flask(__name__)
