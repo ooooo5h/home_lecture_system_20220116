@@ -23,8 +23,8 @@ def create_app():
     def user_get():
         return find_user_by_email(request.args.to_dict())
     
-    @app.post("/lecture")
-    def lecture_post():
-        return get_all_lectures()
+    @app.get("/lecture")
+    def lecture_get():
+        return get_all_lectures(request.args.to_dict())
     
     return app
