@@ -65,7 +65,33 @@ def modify_review(params):
             'code' : 200,
             'message' : '제목 수정 완료'
         }
+        
+        
+    if column_name == 'content':
+        sql = f""
+        
+        db.cursor.execute(sql)
+        db.db.commit()
+        
+        return{
+            'code' : 200,
+            'message' : '내용 수정 완료'
+        }  
+        
+    
+    if column_name == 'score':
+        sql = f""
+        
+        db.cursor.execute(sql)
+        db.db.commit()
+        
+        return{
+            'code' : 200,
+            'message' : '점수 수정 완료'
+        }  
+        
     
     return{
-        '임시' : '리뷰수정기능'
-    }
+        'code' : 400,
+        'message' : '필드에 잘못된 값 입력했음'
+    }, 400
