@@ -1,4 +1,3 @@
-from shelve import DbfilenameShelf
 from server.model import Lectures
 from server import db
 
