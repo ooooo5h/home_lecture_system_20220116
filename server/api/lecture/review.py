@@ -52,6 +52,20 @@ def write_review(params):
     }
     
 def modify_review(params):
+    
+    column_name = params['field']
+    
+    if column_name == 'title':
+        sql = f"UPDATE lecture_review SET title='{params['value']}' WHERE id = {params['review_id']}"
+        
+        db.cursor.execute(sql)
+        db.db.commit()
+        
+        return{
+            'code' : 200,
+            'message' : '제목 수정 완료'
+        }
+    
     return{
         '임시' : '리뷰수정기능'
     }
