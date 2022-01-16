@@ -1,4 +1,4 @@
-from server.model import Lectures
+from server.model import Lectures, Reviews
 from server import db
 
 def get_all_lectures(params):
@@ -70,10 +70,16 @@ def view_lecture_detail(id, params):
     lecture_data = db.executeOne(sql)
     lecture = Lectures(lecture_data)
     
+    
+    sql = f"SELECT * FROM lecture_review WHERE lecture_id = {id}"
+    
+    review_data_list = db.executeAll(sql)
+    reviews = [Reviews(row).get_data_object() for row in review_data_list]
+    
     return{
         'code' : 200,
         'message' : '강의 상세 조회',
         'data' : {
-            'lecture' : lecture.get_data_object()
+            'lecture' : reviews
         }
     }
