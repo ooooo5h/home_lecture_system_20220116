@@ -22,6 +22,17 @@ def login(params):
     
 def sign_up(params):
        
+    sql = f"SELECT * FROM users WHERE email = '{params['email']}'"
+    
+    already_user_data = db.executeOne(sql)
+    
+    if already_user_data:
+        return {
+            'code' : 400,
+            'message' : '이미 가입된 이메일'
+        }
+    
+       
     sql = f"INSERT INTO users (email, password, name) VALUES ('{params['email']}','{params['password']}','{params['name']}')"
     
     db.insertAndCommit(sql)
