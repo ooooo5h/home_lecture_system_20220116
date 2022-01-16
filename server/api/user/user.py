@@ -1,7 +1,5 @@
-from server.db_connector import DBConnector
 from server.model.users import Users
-
-db = DBConnector()
+from server import db
 
 def login(params):
     sql = f"SELECT * FROM users WHERE email = '{params['email']}' AND password = '{params['password']}'"
