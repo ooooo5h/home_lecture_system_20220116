@@ -29,7 +29,7 @@ def create_app():
     
     @app.get("/lecture/<lecture_id>")
     def lecture_detail(lecture_id):
-        return view_lecture_detail()
+        return view_lecture_detail(lecture_id, request.args.to_dict())
     
     @app.post("/lecture")
     def lecture_post():
