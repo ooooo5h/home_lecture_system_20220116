@@ -39,3 +39,9 @@ def apply_lecture(params):
         'code' : 200,
         'message' : '수강 신청 완료'
     }
+    
+# 수강 취소
+def cancel_apply(params):
+    return{
+        'code' : '수강취소 테스트'
+    }
