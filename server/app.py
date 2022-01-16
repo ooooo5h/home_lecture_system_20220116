@@ -47,5 +47,4 @@ def create_app():
     def review_patch():
         return modify_review(request.form.to_dict())
     
-    
     return app
