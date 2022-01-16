@@ -42,6 +42,23 @@ def apply_lecture(params):
     
 # 수강 취소
 def cancel_apply(params):
+    
+    sql = f"SELECT * FROM lecture_user WHERE lecture_id = {params['lecture_id']} AND user_id = {params['user_id']}"
+    
+    already_apply = db.executeOne(sql)
+    
+    if already_apply is None:
+        return{
+            'code' : 400,
+            'message' : '신청 부터 하세요'
+        }, 400
+        
+    sql = f"DELETE FROM lecture_user WHERE lecture_id={params['lecture_id']} AND user_id = {params['user_id']}"
+    
+    db.cursor.execute(sql)
+    db.db.commit()
+    
     return{
-        'code' : '수강취소 테스트'
+        'code' : 200,
+        'message' : '수강취소 성공'
     }
