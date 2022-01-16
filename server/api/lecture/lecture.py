@@ -74,12 +74,12 @@ def view_lecture_detail(id, params):
     sql = f"SELECT * FROM lecture_review WHERE lecture_id = {id}"
     
     review_data_list = db.executeAll(sql)
-    reviews = [Reviews(row).get_data_object() for row in review_data_list]
+    review_list = [Reviews(row).get_data_object() for row in review_data_list]
     
     return{
         'code' : 200,
         'message' : '강의 상세 조회',
         'data' : {
-            'lecture' : reviews
+            'lecture' : lecture.get_data_object(reviews=review_list)
         }
     }

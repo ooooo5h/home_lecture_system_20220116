@@ -6,7 +6,7 @@ class Lectures:
         self.fee = data_dict['fee']
         self.campus = data_dict['campus']
         
-    def get_data_object(self):
+    def get_data_object(self, reviews=None):
         data = {
             'id' : self.id,
             'name' : self.name,
@@ -14,5 +14,8 @@ class Lectures:
             'fee' : self.fee,
             'campus' : self.campus,
         }
+        
+        if reviews:
+            data['reviews'] = reviews
         
         return data
