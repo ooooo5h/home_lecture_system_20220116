@@ -11,7 +11,7 @@ def create_app():
     
     @app.post("/user")
     def user_post():
-        return login(request.args.to_dict())
+        return login(request.form.to_dict())
     
     @app.post("/lecture")
     def lecture_post():
