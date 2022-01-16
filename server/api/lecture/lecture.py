@@ -1,3 +1,4 @@
+from shelve import DbfilenameShelf
 from server.model import Lectures
 from server import db
 
@@ -19,6 +20,22 @@ def get_all_lectures(params):
     
 # 수강신청 기능
 def apply_lecture(params):
+    
+    sql = f"SELECT * FROM lecture_user WHERE user_id ={params['user_id']} AND lecture_id = {params['lecture_id']}"
+    
+    already_apply = db.executeOne(sql)
+    
+    if already_apply:
+        return{
+            'code' : 400,
+            'mesasge' : '이미 수강신청 완료',
+        }, 400
+    
+    sql = f"INSERT INTO lecture_user VALUES ({params['lecture_id']}, {params['user_id']})"
+    
+    db.insertAndCommit(sql)
+    
     return{
-        'code' : '임시 수강신청'
+        'code' : 200,
+        'message' : '수강 신청 완료'
     }
