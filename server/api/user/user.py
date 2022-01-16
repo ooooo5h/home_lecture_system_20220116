@@ -9,10 +9,7 @@ def test():
     db.cursor.execute(sql)
     all_list = db.cursor.fetchall()
     
-    all_users = []
-    
-    for row in all_list:
-        all_users.append(Users(row).get_data_object())
+    all_users = [Users(row).get_data_object() for row in all_list]
     
     return {
         'users' : all_users
