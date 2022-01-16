@@ -31,7 +31,11 @@ def write_review(params):
             'message' : '수강 해야지만 리뷰 작성 가능'
         }, 400
     
+    sql = f"INSERT INTO lecture_review (lecture_id, user_id, title, content, score) VALUES ({params['lecture_id']}, {params['user_id']}, '{params['title']}', '{params['content']}', {score})"
+    
+    db.insertAndCommit(sql)
+    
     return{
         'code' : 200,
-        'message' : '임시 리뷰작성 완료'
+        'message' : '리뷰작성 완료'
     }
