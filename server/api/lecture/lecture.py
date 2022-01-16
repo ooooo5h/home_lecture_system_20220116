@@ -1,4 +1,4 @@
-import sqlite3
+from server.model import Lectures
 from server.db_connector import DBConnector
 
 db = DBConnector()
@@ -9,8 +9,8 @@ def lecture_test():
     db.cursor.execute(sql)
     lecture_list = db.cursor.fetchall()
     
-    print(lecture_list)
+    lectures = [Lectures(row).get_data_object() for row in lecture_list]
     
     return{
-        '강의 임시' : '강의 테스트'
+        'lectures' : lectures
     }
