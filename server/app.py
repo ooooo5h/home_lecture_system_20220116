@@ -1,14 +1,15 @@
 # 플라스크 자체를 로딩
-import re
 from flask import Flask, request
 from server.db_connector import DBConnector
-from .api.user import login, sign_up, find_user_by_email
-from .api.lecture import lecture_test
 
-# db = DBConnector()
+
+db = DBConnector()
 
 def create_app():
     app = Flask(__name__)
+    
+    from .api.user import login, sign_up, find_user_by_email
+    from .api.lecture import get_all_lectures
     
     @app.post("/user")
     def user_post():
@@ -24,6 +25,6 @@ def create_app():
     
     @app.post("/lecture")
     def lecture_post():
-        return lecture_test()
+        return get_all_lectures()
     
     return app
