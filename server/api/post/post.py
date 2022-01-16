@@ -56,6 +56,22 @@ def modify_post(params):
         
 def delete_post(params):
     
+    sql = f"SELECT * FROM posts WHERE id = {params['post_id']}"
+    
+    post_data = db.executeOne(sql)
+    
+    if post_data is None:
+        return{
+            'code' : 400,
+            'message' : '없는 게시글입니다.'
+        }, 400
+        
+    if post_data['user_id'] != int(params['user_id']):
+        return{
+            'code' : 400,
+            'message' : '니가 쓴 글만 삭제가능'
+        }, 400
+    
     sql = f"DELETE FROM posts WHERE id = {params['post_id']}"
     
     db.executeQueryAndCommit(sql)
