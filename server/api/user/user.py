@@ -42,3 +42,8 @@ def sign_up(params):
         'message' : '회원가입 성공'
     }
     
+# 이메일을 받아서 사용자 정보 조회하는 기능 추가
+def find_user_by_email(params):
+    return{
+        'code' : '테스트 사용자 정보'
+    }
