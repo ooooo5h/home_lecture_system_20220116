@@ -65,6 +65,15 @@ def cancel_apply(params):
 # 특정 강의 상세보기
 def view_lecture_detail(id, params):
     
+    sql = f"SELECT * FROM lectures WHERE id = {id}"
+    
+    lecture_data = db.executeOne(sql)
+    lecture = Lectures(lecture_data)
+    
     return{
-        'code' : '임시 강의 상세보기'
+        'code' : 200,
+        'message' : '강의 상세 조회',
+        'data' : {
+            'lecture' : lecture.get_data_object()
+        }
     }
