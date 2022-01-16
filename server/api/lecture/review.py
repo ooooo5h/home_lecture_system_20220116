@@ -68,7 +68,7 @@ def modify_review(params):
         
         
     if column_name == 'content':
-        sql = f""
+        sql = f"UPDATE lecture_review SET content = '{params['value']}' WHERE id = {params['review_id']}"
         
         db.cursor.execute(sql)
         db.db.commit()
@@ -80,7 +80,7 @@ def modify_review(params):
         
     
     if column_name == 'score':
-        sql = f""
+        sql = f"UPDATE lecture_review SET score = {params['value']} WHERE id ={params['review_id']}"
         
         db.cursor.execute(sql)
         db.db.commit()
